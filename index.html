@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Breakin' Bread Bakery – Union, NJ</title>
+  <meta name="description" content="Breakin' Bread Bakery is your neighborhood spot for coffee, bread, and breakfast in Union, NJ. Fresh bread daily, custom orders, pastries, sandwiches, and specialty coffee at 1300 Burnet Ave." />
+  <meta name="keywords" content="Breakin Bread Bakery, Union NJ bakery, coffee Union NJ, breakfast Union NJ, fresh bread Union NJ, pastries Union NJ" />
+  <meta property="og:title" content="Breakin' Bread Bakery – Union, NJ" />
+  <meta property="og:description" content="Your neighborhood spot for coffee, bread and breakfast. Fresh bread daily, pastries, sandwiches, custom orders, and specialty coffee in Union, NJ." />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap">
+  <style>
+    :root {
+      --primary: #6b3f22;
+      --accent: #c77a36;
+      --dark: #1a120d;
+      --light: #f7efe6;
+      --text: #f9f4ef;
+      --radius-md: 16px;
+      --radius-lg: 22px;
+      --border-base: 1.5px;
+      --border-strong: 2.5px;
+      --shadow-soft: 0 20px 48px rgba(15, 8, 4, 0.45);
+      --transition-fast: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-med: 420ms cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Jost", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      line-height: 1.6;
+      background: radial-gradient(circle at 0% 0%, #8c572d 0, #2e1c13 38%, #120c08 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 15% 0%, rgba(199, 122, 54, 0.5), transparent 50%),
+        radial-gradient(circle at 75% 10%, rgba(108, 63, 34, 0.7), transparent 50%),
+        radial-gradient(circle at 20% 90%, rgba(245, 215, 176, 0.22), transparent 50%);
+      mix-blend-mode: screen;
+      opacity: 0.9;
+      filter: blur(10px);
+      z-index: -2;
+      animation: bg-orbit 32s infinite alternate ease-in-out;
+      pointer-events: none;
+    }
+
+    @keyframes bg-orbit {
+      0% { transform: translate3d(0, 0, 0) scale(1); }
+      50% { transform: translate3d(3%, -3%, 0) scale(1.03); }
+      100% { transform: translate3d(-3%, 3%, 0) scale(1.02); }
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+      opacity: 0.16;
+      mix-blend-mode: soft-light;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(20, 12, 8, 0.94);
+      padding: 14px 24px;
+      display: flex;
+      gap: 28px;
+      justify-content: center;
+      border-bottom: 1px solid rgba(247, 239, 230, 0.12);
+      backdrop-filter: blur(12px);
+    }
+
+    nav a {
+      color: #f8eee5;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    header {
+      color: #fff;
+      padding: 32px 16px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      inset: -40px;
+      background:
+        linear-gradient(rgba(22, 12, 7, 0.45), rgba(22, 12, 7, 0.62)),
+        url("image-6.jpg") center/cover no-repeat;
+      opacity: 0.45;
+      z-index: -2;
+      transform: scale(1.05);
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 50% at 0% 30%, rgba(199, 122, 54, 0.28) 0%, transparent 70%),
+        radial-gradient(ellipse 70% 50% at 100% 70%, rgba(107, 63, 34, 0.4) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    header .container,
+    main section .container { position: relative; z-index: 2; }
+
+    .hero-layout,
+    .highlight-grid,
+    .hours-grid,
+    .contact-layout {
+      display: grid;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .hero-layout { grid-template-columns: minmax(0, 1.45fr) minmax(0, 1.15fr); }
+    .highlight-grid,
+    .hours-grid,
+    .contact-layout { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.5fr); }
+
+    h1 { font-size: 2.45rem; margin-bottom: 12px; }
+    h2 { font-size: 1.7rem; margin-bottom: 12px; color: #fff4e7; }
+    h3 { font-size: 1.05rem; margin-bottom: 6px; color: #fff7f0; }
+    p { margin-bottom: 10px; color: #f0e6dd; }
+
+    .hero-sub { font-size: 1.05rem; max-width: 34rem; }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(28, 18, 13, 0.7);
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border: 1px solid rgba(248, 238, 229, 0.24);
+    }
+
+    .tilt-shell { position: relative; }
+
+    .hero-card,
+    .card {
+      border-radius: var(--radius-lg);
+      border: var(--border-base) solid rgba(247, 239, 230, 0.24);
+      background: rgba(28, 18, 13, 0.92);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+      transition:
+        transform var(--transition-med),
+        box-shadow var(--transition-med),
+        border-color var(--transition-fast),
+        opacity 480ms cubic-bezier(0.19, 1, 0.22, 1),
+        translate 480ms cubic-bezier(0.19, 1, 0.22, 1),
+        scale 480ms cubic-bezier(0.19, 1, 0.22, 1);
+      transform-style: preserve-3d;
+      transform-origin: center;
+      opacity: 0;
+      translate: 0 28px;
+      scale: 0.98;
+      padding: 26px;
+    }
+
+    .hero-card::before,
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 0 0, rgba(199, 122, 54, 0.12), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(245, 215, 176, 0.08), transparent 60%);
+      mix-blend-mode: soft-light;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition-fast), transform var(--transition-fast);
+      transform: translate3d(0, 0, 40px);
+    }
+
+    .hero-card.visible,
+    .card.visible {
+      opacity: 1;
+      translate: 0 0;
+      scale: 1;
+    }
+
+    .hero-card:hover,
+    .card:hover {
+      box-shadow: 0 26px 60px rgba(0, 0, 0, 0.55);
+      border-width: var(--border-strong);
+      border-color: rgba(232, 184, 125, 0.78);
+    }
+
+    .hero-card:hover::before,
+    .card:hover::before {
+      opacity: 1;
+      transform: translate3d(0, 0, 80px);
+    }
+
+    .btn-row {
+      margin-top: 22px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      padding: 11px 22px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #e8b97c);
+      color: #1b120e;
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.38);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    main { position: relative; isolation: isolate; }
+    main::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 50% at 0% 30%, rgba(199, 122, 54, 0.14) 0%, transparent 70%),
+        radial-gradient(ellipse 70% 50% at 100% 70%, rgba(107, 63, 34, 0.18) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    main section {
+      padding: 64px 0;
+      position: relative;
+    }
+
+    .section-intro { max-width: 40rem; margin-bottom: 22px; color: #eadfd4; }
+
+    .card-grid-4 {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    }
+
+    .product-card {
+      transition: background var(--transition-fast), border-color var(--transition-fast), border-width var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+      position: relative;
+    }
+
+    .product-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(circle at 0% 0%, rgba(199, 122, 54, 0.22), transparent 60%);
+      mix-blend-mode: soft-light;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 1;
+      transition: opacity var(--transition-fast);
+    }
+
+    .product-card:hover {
+      background: radial-gradient(circle at 0% 0%, rgba(199, 122, 54, 0.12), rgba(37, 24, 17, 0.98));
+      border-width: 3px;
+      border-color: rgba(232, 184, 125, 0.92);
+      box-shadow: 0 26px 60px rgba(0, 0, 0, 0.6);
+    }
+
+    .product-card:hover::after { opacity: 1; }
+    .product-card:hover .slider img.active { transform: scale(1.03); }
+
+    .slider {
+      position: relative;
+      overflow: hidden;
+      border-radius: 14px;
+      margin-bottom: 12px;
+      background: #22150f;
+    }
+
+    .slider img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      object-position: center;
+      display: none;
+      transition: opacity var(--transition-med), transform var(--transition-med);
+    }
+
+    .slider img.active { display: block; }
+
+    .slider-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(20, 12, 8, 0.88);
+      color: #ffffff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+      z-index: 2;
+    }
+
+    .slider-arrow:hover {
+      background: rgba(20, 12, 8, 1);
+      transform: translateY(-50%) scale(1.05);
+      box-shadow: 0 8px 18px rgba(15, 8, 4, 0.7);
+    }
+
+    .slider-arrow.left { left: 8px; }
+    .slider-arrow.right { right: 8px; }
+
+    .hero-photo-box {
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-photo-box img {
+      width: 100%;
+      height: 340px;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .hero-photo-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(15, 8, 4, 0.2), transparent 40%);
+      mix-blend-mode: multiply;
+    }
+
+    .hours-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .hours-list div {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      padding: 6px 0;
+      border-bottom: 1px dashed rgba(248, 238, 229, 0.24);
+      color: #f8eee5;
+    }
+
+    .map-placeholder {
+      border-radius: var(--radius-md);
+      border: 1.5px solid rgba(248, 238, 229, 0.18);
+      padding: 6px;
+      background: #1d130e;
+      box-shadow: 0 16px 34px rgba(15, 8, 4, 0.32);
+    }
+
+    .map-placeholder iframe {
+      border-radius: 12px;
+      display: block;
+    }
+
+    form { display: grid; gap: 12px; }
+
+    label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: #f0e3d6;
+    }
+
+    input, textarea {
+      padding: 9px 11px;
+      border-radius: 8px;
+      border: 1px solid rgba(248, 238, 229, 0.18);
+      font: inherit;
+      width: 100%;
+      background: rgba(20, 12, 8, 0.72);
+      color: #f9f4ef;
+    }
+
+    textarea { min-height: 100px; resize: vertical; }
+
+    footer {
+      padding: 20px 16px;
+      text-align: center;
+      background: rgba(20, 12, 8, 0.96);
+      color: #c7b8aa;
+      font-size: 0.8rem;
+      border-top: 1px solid rgba(248, 238, 229, 0.12);
+    }
+
+    .footer-links {
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: #f8eee5;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+    }
+
+    .wa-button {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 999;
+      background: #25D366;
+      color: #fff;
+      border-radius: 999px;
+      padding: 12px 20px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        gap: 16px;
+        padding: 12px 14px;
+        flex-wrap: wrap;
+      }
+
+      .hero-layout,
+      .highlight-grid,
+      .hours-grid,
+      .contact-layout { grid-template-columns: minmax(0, 1fr); }
+
+      header { padding-top: 24px; }
+      h1 { font-size: 1.95rem; }
+      .hero-photo-box img { height: 260px; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="#menu">Menu</a>
+    <a href="#about">About</a>
+    <a href="#hours">Hours</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <header>
+    <div class="container">
+      <div class="tilt-shell">
+        <div class="hero-card">
+          <div class="hero-layout">
+            <div>
+              <div class="pill">Union, NJ • Fresh Bread Daily • Cozy Neighborhood Bakery</div>
+              <h1>Your neighborhood spot for coffee, bread and breakfast</h1>
+              <p class="hero-sub">
+                Breakin' Bread Bakery is where fresh bread, specialty coffee, breakfast favorites, pastries, and comfort food come together in a warm neighborhood setting. Stop in for a quick bite, a coffee break, or your next custom order.
+              </p>
+              <div class="btn-row">
+                <a class="btn btn-primary" href="https://maps.google.com/?q=1300+Burnet+Ave+Union+NJ+07083" target="_blank" rel="noopener noreferrer">Get Directions</a>
+                <a class="btn btn-primary" href="tel:+19085882626">Call Now</a>
+                <a class="btn btn-primary" href="https://www.instagram.com/_breakin_bread/" target="_blank" rel="noopener noreferrer">Instagram</a>
+              </div>
+              <div style="margin-top:18px; font-size:0.9rem; color:#eadfd4;">
+                <strong>Address:</strong> 1300 Burnet Ave, Union, NJ 07083 · <strong>Phone:</strong> (908) 588-2626
+              </div>
+            </div>
+            <div class="hero-photo-box">
+              <img src="image-7.jpg" alt="Fresh pastries and strawberries at Breakin' Bread Bakery" />
+              <div class="hero-photo-overlay"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="menu">
+      <div class="container">
+        <div class="tilt-shell">
+          <div class="card">
+            <h2>Menu Highlights</h2>
+            <p class="section-intro">
+              From breakfast sandwiches and specialty coffee to pastries, breads, and satisfying lunch favorites, Breakin' Bread Bakery brings fresh-made comfort to every part of the day.
+            </p>
+            <div class="card-grid-4">
+              <div class="tilt-shell product-tilt">
+                <div class="card product-card">
+                  <div class="slider" data-slider="breakfast">
+                    <button class="slider-arrow left" data-dir="prev">&#10094;</button>
+                    <button class="slider-arrow right" data-dir="next">&#10095;</button>
+                    <img src="image-3.jpg" alt="Breakfast sandwich at Breakin' Bread Bakery" class="active">
+                    <img src="image-9.jpg" alt="Croissant breakfast sandwich at Breakin' Bread Bakery">
+                  </div>
+                  <h3>Breakfast Favorites</h3>
+                  <p>Warm breakfast sandwiches, flaky croissants, and early-morning comfort made to start the day right.</p>
+                </div>
+              </div>
+
+              <div class="tilt-shell product-tilt">
+                <div class="card product-card">
+                  <div class="slider" data-slider="sandwiches">
+                    <button class="slider-arrow left" data-dir="prev">&#10094;</button>
+                    <button class="slider-arrow right" data-dir="next">&#10095;</button>
+                    <img src="image.jpg" alt="Burger and fries at Breakin' Bread Bakery" class="active">
+                    <img src="image-2.jpg" alt="Breaded chicken sandwiches at Breakin' Bread Bakery">
+                    <img src="image-10.jpg" alt="Savory hand pie at Breakin' Bread Bakery">
+                    <img src="image-6.jpg" alt="Burger plated in front of Breakin' Bread Bakery wall">
+                  </div>
+                  <h3>Sandwiches &amp; Savory Bites</h3>
+                  <p>From stacked sandwiches to hearty plates and grab-and-go savory options, the menu is built for breakfast and lunch cravings.</p>
+                </div>
+              </div>
+
+              <div class="tilt-shell product-tilt">
+                <div class="card product-card">
+                  <div class="slider" data-slider="bakery">
+                    <button class="slider-arrow left" data-dir="prev">&#10094;</button>
+                    <button class="slider-arrow right" data-dir="next">&#10095;</button>
+                    <img src="image-8.jpg" alt="Fresh baked bread loaf at Breakin' Bread Bakery" class="active">
+                    <img src="image-4.jpg" alt="Dessert at Breakin' Bread Bakery">
+                    <img src="image-7.jpg" alt="Filled croissants at Breakin' Bread Bakery">
+                  </div>
+                  <h3>Fresh Bread &amp; Pastries</h3>
+                  <p>Fresh bread daily, pastries, sweet treats, and bakery staples that give the shop its name and neighborhood feel.</p>
+                </div>
+              </div>
+
+              <div class="tilt-shell product-tilt">
+                <div class="card product-card">
+                  <div class="slider" data-slider="coffee">
+                    <button class="slider-arrow left" data-dir="prev">&#10094;</button>
+                    <button class="slider-arrow right" data-dir="next">&#10095;</button>
+                    <img src="image-5.jpg" alt="Specialty iced coffee at Breakin' Bread Bakery" class="active">
+                    <img src="image-4.jpg" alt="Dessert display inside Breakin' Bread Bakery">
+                  </div>
+                  <h3>Specialty Coffee &amp; Treats</h3>
+                  <p>Take a coffee break with specialty drinks and sweet bakery picks, whether you are stopping in quickly or staying a little while.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="tilt-shell">
+          <div class="card">
+            <div class="highlight-grid">
+              <div>
+                <h2>About Breakin' Bread</h2>
+                <p class="section-intro">
+                  Breakin' Bread Bakery is a cozy neighborhood bakery in Union built around fresh bread, welcoming service, and the kind of food that keeps people coming back. Whether you are stopping in for breakfast, specialty coffee, lunch, pastries, or a custom order, the goal is simple: serve food that feels fresh, comforting, and worth sharing.
+                </p>
+                <p>
+                  We bake fresh bread daily, offer made-to-order favorites throughout the day, and create a warm local spot where customers can grab something quick or take their time. From everyday bakery staples to custom orders and specialty drinks, Breakin' Bread brings together coffee, bread, and breakfast in one neighborhood destination.
+                </p>
+              </div>
+              <div class="hero-photo-box">
+                <img src="image-6.jpg" alt="Breakin' Bread Bakery branding wall and sandwich" />
+                <div class="hero-photo-overlay"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="hours">
+      <div class="container">
+        <div class="tilt-shell">
+          <div class="card">
+            <div class="hours-grid">
+              <div>
+                <h2>Hours &amp; Location</h2>
+                <p class="section-intro">
+                  Visit Breakin' Bread Bakery in Union for coffee, fresh bread, pastries, breakfast, and lunch throughout the week. We are easy to find at 1300 Burnet Ave.
+                </p>
+                <div class="hours-list">
+                  <div><span>Monday</span><span>5:30 am – 4:00 pm</span></div>
+                  <div><span>Tuesday</span><span>5:30 am – 4:00 pm</span></div>
+                  <div><span>Wednesday</span><span>5:30 am – 4:00 pm</span></div>
+                  <div><span>Thursday</span><span>5:30 am – 4:00 pm</span></div>
+                  <div><span>Friday</span><span>5:30 am – 4:00 pm</span></div>
+                  <div><span>Saturday</span><span>6:30 am – 4:00 pm</span></div>
+                  <div><span>Sunday</span><span>Closed</span></div>
+                </div>
+              </div>
+              <div class="map-placeholder">
+                <iframe
+                  src="https://www.google.com/maps?q=1300%20Burnet%20Ave%20Union%20NJ%2007083&z=15&output=embed"
+                  width="100%"
+                  height="260"
+                  style="border:0;"
+                  allowfullscreen=""
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="tilt-shell">
+          <div class="card">
+            <div class="contact-layout">
+              <div>
+                <h2>Contact Breakin' Bread</h2>
+                <p class="section-intro">
+                  Have a question about bakery items, custom orders, or what is fresh today? Give us a call, stop by, or send a message and we will be happy to help.
+                </p>
+                <p><strong>Phone:</strong> (908) 588-2626</p>
+                <p><strong>Address:</strong> 1300 Burnet Ave, Union, NJ 07083</p>
+                <p><strong>Instagram:</strong> <a href="https://www.instagram.com/_breakin_bread/" target="_blank" rel="noopener noreferrer">@_breakin_bread</a></p>
+              </div>
+              <div class="tilt-shell">
+                <div class="card">
+                  <form>
+                    <div>
+                      <label for="name">Name</label>
+                      <input id="name" type="text" placeholder="Your name" />
+                    </div>
+                    <div>
+                      <label for="email">Email</label>
+                      <input id="email" type="email" placeholder="you@example.com" />
+                    </div>
+                    <div>
+                      <label for="phone">Phone</label>
+                      <input id="phone" type="tel" placeholder="(   )    -" />
+                    </div>
+                    <div>
+                      <label for="message">Message</label>
+                      <textarea id="message" placeholder="Ask about menu items, custom orders, or availability"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <a class="wa-button" href="https://wa.me/19085882626" target="_blank" rel="noopener noreferrer">💬 WhatsApp Us</a>
+
+  <footer>
+    <div class="footer-links">
+      <a href="https://www.instagram.com/_breakin_bread/" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a href="https://maps.google.com/?q=1300+Burnet+Ave+Union+NJ+07083" target="_blank" rel="noopener noreferrer">Directions</a>
+      <a href="https://wa.me/19085882626" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+    </div>
+    © Breakin' Bread Bakery – Union, NJ. Website created by T.J.P.
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const sliders = document.querySelectorAll(".slider");
+      sliders.forEach(slider => {
+        const images = slider.querySelectorAll("img");
+        let current = 0;
+        if (!images.length) return;
+        function show(index) {
+          images[current].classList.remove("active");
+          current = (index + images.length) % images.length;
+          images[current].classList.add("active");
+        }
+        images[0].classList.add("active");
+        const leftBtn = slider.querySelector('.slider-arrow.left');
+        const rightBtn = slider.querySelector('.slider-arrow.right');
+        if (leftBtn) leftBtn.addEventListener("click", () => show(current - 1));
+        if (rightBtn) rightBtn.addEventListener("click", () => show(current + 1));
+      });
+    });
+
+    (function () {
+      const revealCards = document.querySelectorAll(".card, .hero-card");
+      if (!("IntersectionObserver" in window) || !revealCards.length) {
+        revealCards.forEach(c => c.classList.add("visible"));
+        return;
+      }
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.16 });
+      revealCards.forEach(card => observer.observe(card));
+    })();
+  </script>
+</body>
+</html>
